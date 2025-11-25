@@ -1,14 +1,16 @@
 "use client"
 
 import { useState } from "react"
+import Image from "next/image"
+
 import { RebillCheckout } from "@/components/rebill-checkout"
+import { PublicKeyWarning } from "@/components/public-key-warning"
 import { useConfetti } from "@/hooks/use-confetti"
 
 export default function CheckoutPage() {
   const [paymentStatus, setPaymentStatus] = useState<"idle" | "success" | "error">("idle")
   const [errorMessage, setErrorMessage] = useState<string>("")
   const { fire: fireConfetti } = useConfetti()
-
   const instantProduct = {
     name: [
       {
@@ -39,6 +41,8 @@ export default function CheckoutPage() {
     setErrorMessage(detail?.message || "Payment failed")
   }
 
+  const publicKey = null
+
   return (
     <main className="min-h-screen bg-background flex flex-col p-4 pt-8 w-full">
       <div className="w-full max-w-6xl mx-auto">
@@ -59,13 +63,30 @@ export default function CheckoutPage() {
           )}
         </div>
 
-        <RebillCheckout
-          publicKey={process.env.NEXT_PUBLIC_REBILL_PUBLIC_KEY || ""}
-          product={instantProduct}
-          onSuccess={handleSuccess}
-          onError={handleError}
-        />
+        {!publicKey && (
+          <div className="relative">
+            <PublicKeyWarning />
+            <div className="mt-4 rounded-lg overflow-hidden border border-border shadow-sm opacity-50">
+              <Image
+                src="/rebill-placeholder.png"
+                alt="Rebill Checkout Preview"
+                width={1160}
+                height={1000}
+                className="w-full h-auto"
+                priority
+              />
+            </div>
+          </div>
+        )}
 
+        {publicKey && (
+          <RebillCheckout
+            publicKey={publicKey}
+            product={instantProduct}
+            onSuccess={handleSuccess}
+            onError={handleError}
+          />
+        )}
       </div>
     </main>
   )

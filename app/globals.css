@@ -122,4 +122,53 @@
   body {
     @apply bg-background text-foreground;
   }
+
+  /* Enhanced toast styling to match app design system */
+  .Toastify__toast-container {
+    padding: 1rem;
+  }
+
+  .Toastify__toast {
+    background: oklch(var(--card));
+    color: oklch(var(--card-foreground));
+    border-radius: var(--radius-lg);
+    font-family: var(--font-sans);
+    box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+    border: 1px solid oklch(var(--border));
+    padding: 1rem 1.25rem;
+    min-height: auto;
+  }
+
+  .Toastify__toast--error {
+    background: oklch(var(--destructive));
+    color: oklch(var(--destructive-foreground));
+    border-color: oklch(var(--destructive));
+  }
+
+  .dark .Toastify__toast {
+    box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.3), 0 4px 6px -4px rgb(0 0 0 / 0.2);
+  }
+
+  .Toastify__toast-body {
+    font-size: 0.875rem;
+    line-height: 1.5;
+    padding: 0;
+    margin: 0;
+  }
+
+  .Toastify__close-button {
+    color: currentColor;
+    opacity: 0.5;
+    align-self: flex-start;
+    margin-top: 0.25rem;
+  }
+
+  .Toastify__close-button:hover {
+    opacity: 1;
+  }
+
+  .Toastify__close-button > svg {
+    height: 18px;
+    width: 18px;
+  }
 }
