@@ -8,7 +8,7 @@ const _geist = Geist({ subsets: ["latin"] })
 const _geistMono = Geist_Mono({ subsets: ["latin"] })
 
 export const metadata: Metadata = {
-  title: "Rebill Checkout - Secure Payment",
+  title: "Rebill Checkout - v0",
   description: "Complete your purchase securely with Rebill",
   generator: "v0.app",
   icons: {
