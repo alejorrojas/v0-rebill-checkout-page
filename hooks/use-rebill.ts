@@ -22,29 +22,18 @@ export function useRebill({ publicKey, product, onSuccess, onError }: UseRebillP
   const [isLoading, setIsLoading] = useState(true)
 
   useEffect(() => {
-    let mounted = true
-
     const initializeSDK = async () => {
       try {
         await import("rebill-web-components-sdk")
-        // Wait a brief moment for the web component to be fully registered
-        await new Promise((resolve) => setTimeout(resolve, 500))
-        if (mounted) {
-          setIsLoading(false)
-        }
+        console.log("Rebill SDK loaded")
+        setIsLoading(false)
       } catch (error) {
         console.error("[v0] Failed to load Rebill SDK:", error)
-        if (mounted) {
-          setIsLoading(false)
-        }
+        setIsLoading(false)
       }
     }
 
     initializeSDK()
-
-    return () => {
-      mounted = false
-    }
   }, [])
 
   useEffect(() => {
