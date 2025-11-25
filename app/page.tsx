@@ -45,7 +45,6 @@ export default function CheckoutPage() {
         <div className="mb-8 text-center space-y-2">
           {paymentStatus === "success" ? (
             <>
-              <h1 className="text-4xl font-bold text-foreground mb-3 text-balance">Payment Successful!</h1>
               <p className="text-lg text-muted-foreground text-pretty">
                 Thank you for your subscription. You're all set!
               </p>
