@@ -1,7 +1,6 @@
 "use client"
 
 import { useEffect, useRef, useState } from "react"
-import "rebill-web-components-sdk"
 
 interface RebillProduct {
   name: { language: string; text: string }[]
@@ -23,11 +22,29 @@ export function useRebill({ publicKey, product, onSuccess, onError }: UseRebillP
   const [isLoading, setIsLoading] = useState(true)
 
   useEffect(() => {
-    const timer = setTimeout(() => {
-      setIsLoading(false)
-    }, 1500)
+    let mounted = true
 
-    return () => clearTimeout(timer)
+    const initializeSDK = async () => {
+      try {
+        await import("rebill-web-components-sdk")
+        // Wait a brief moment for the web component to be fully registered
+        await new Promise((resolve) => setTimeout(resolve, 500))
+        if (mounted) {
+          setIsLoading(false)
+        }
+      } catch (error) {
+        console.error("[v0] Failed to load Rebill SDK:", error)
+        if (mounted) {
+          setIsLoading(false)
+        }
+      }
+    }
+
+    initializeSDK()
+
+    return () => {
+      mounted = false
+    }
   }, [])
 
   useEffect(() => {
