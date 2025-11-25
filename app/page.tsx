@@ -41,7 +41,7 @@ export default function CheckoutPage() {
     setErrorMessage(detail?.message || "Payment failed")
   }
 
-  const publicKey = null
+  const publicKey = process.env.NEXT_PUBLIC_REBILL_PUBLIC_KEY
 
   return (
     <main className="min-h-screen bg-background flex flex-col p-4 pt-8 w-full">
@@ -63,21 +63,7 @@ export default function CheckoutPage() {
           )}
         </div>
 
-        {!publicKey && (
-          <div className="relative">
-            <PublicKeyWarning />
-            <div className="mt-4 rounded-lg overflow-hidden border border-border shadow-sm opacity-50">
-              <Image
-                src="/rebill-placeholder.png"
-                alt="Rebill Checkout Preview"
-                width={1160}
-                height={1000}
-                className="w-full h-auto"
-                priority
-              />
-            </div>
-          </div>
-        )}
+        {!publicKey && <PublicKeyWarning /> }
 
         {publicKey && (
           <RebillCheckout

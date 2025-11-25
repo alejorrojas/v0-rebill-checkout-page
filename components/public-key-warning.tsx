@@ -1,17 +1,21 @@
-"use client"
+"use client";
 
-import { useEffect } from "react"
-import { toast } from "react-toastify"
+import Image from "next/image";
+import { useEffect } from "react";
+import { toast } from "react-toastify";
 
 export function PublicKeyWarning() {
   useEffect(() => {
     toast(
       <div className="space-y-3">
-        <div className="font-semibold text-base">Rebill Public Key Required</div>
+        <div className="font-semibold text-base">
+          Rebill Public Key Required
+        </div>
         <p className="text-sm leading-relaxed opacity-90">
-          This implementation requires a Rebill Public Key to initialize the SDK. Please add your{" "}
-          <code className="bg-white/10 font-mono">REBILL_PUBLIC_KEY</code> as
-          an environment variable and redeploy.
+          This implementation requires a Rebill Public Key to initialize the
+          SDK. Please add your{" "}
+          <code className="bg-white/10 font-mono">REBILL_PUBLIC_KEY</code> as an
+          environment variable and redeploy.
         </p>
         <a
           href="https://docs.rebill.com/products/payments#api-keys-and-activation"
@@ -28,9 +32,32 @@ export function PublicKeyWarning() {
         closeOnClick: false,
         draggable: false,
         closeButton: true,
-      },
-    )
-  }, [])
+      }
+    );
+  }, []);
 
-  return null
+  return (
+    <div className="relative">
+      <div className="w-full opacity-50">
+        {/* Mobile image */}
+        <Image
+          src="/rebill-placeholder-mobile.png"
+          alt="Rebill Checkout Preview"
+          width={1160}
+          height={1000}
+          className="w-full h-auto block md:hidden"
+          priority
+        />
+        {/* Desktop image */}
+        <Image
+          src="/rebill-placeholder.png"
+          alt="Rebill Checkout Preview"
+          width={1160}
+          height={1000}
+          className="w-full h-auto hidden md:block"
+          priority
+        />
+      </div>
+    </div>
+  );
 }
