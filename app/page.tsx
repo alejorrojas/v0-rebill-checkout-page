@@ -67,9 +67,6 @@ export default function CheckoutPage() {
           onError={handleError}
         />
 
-        <div className="mt-6 text-center text-sm text-muted-foreground">
-          <p>🔒 Your payment information is secure and encrypted</p>
-        </div>
       </div>
     </main>
   )
