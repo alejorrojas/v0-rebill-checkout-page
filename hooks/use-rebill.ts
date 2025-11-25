@@ -26,11 +26,10 @@ export function useRebill({ publicKey, product, onSuccess, onError }: UseRebillP
       try {
         await import("rebill-web-components-sdk")
         setTimeout(() => {
-          console.log("Rebill SDK loaded")
           setIsLoading(false)
-        }, 1500)
+        }, 1700)
       } catch (error) {
-        console.error("[v0] Failed to load Rebill SDK:", error)
+        console.error("Failed to load Rebill SDK:", error)
         setIsLoading(false)
       }
     }

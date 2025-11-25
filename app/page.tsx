@@ -24,7 +24,7 @@ export default function CheckoutPage() {
     ],
     amount: 2999,
     currency: "ARS",
-    deviceId: "web-checkout",
+    deviceId: "fpt_9ec48794-95e9-47ba-8092-f86c1088b65a",
   }
 
   const handleSuccess = (detail: any) => {
